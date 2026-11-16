@@ -28,6 +28,7 @@ $Venv    = Join-Path $Home_ 'app'
 $Window  = Join-Path $Home_ 'window'
 $Menu    = Join-Path ([Environment]::GetFolderPath('Programs')) 'JARVIS.lnk'
 $Desktop = Join-Path ([Environment]::GetFolderPath('Desktop')) 'JARVIS.lnk'
+$Remover = Join-Path ([Environment]::GetFolderPath('Programs')) 'JARVIS deinstallieren.lnk'
 
 function Say([string]$Text, [string]$Color = 'Gray') { Write-Host "  $Text" -ForegroundColor $Color }
 function Step([string]$Text) { Write-Host ""; Write-Host "> $Text" -ForegroundColor Cyan }
@@ -76,7 +77,7 @@ if ($Uninstall) {
   Step 'Entferne JARVIS'
   Get-Process msedge, chrome, brave -ErrorAction SilentlyContinue |
     Where-Object { $_.MainWindowTitle -eq 'JARVIS' } | Stop-Process -ErrorAction SilentlyContinue
-  foreach ($item in $Venv, $Window, $Menu, $Desktop) {
+  foreach ($item in $Venv, $Window, $Menu, $Desktop, $Remover) {
     if (Test-Path $item) { Remove-Item $item -Recurse -Force; Say "entfernt: $item" }
   }
   Say "Deine Daten (Gespräche, Gedächtnis, Einstellungen, verschlüsselte API-Keys)" 'Yellow'
@@ -136,6 +137,15 @@ if (-not $NoDesktop) {
   New-Shortcut $Desktop $Gui $Icon
   Say 'Desktop: JARVIS'
 }
+# Uninstall must work after the downloaded folder is gone, so keep a copy of this script.
+Copy-Item $PSCommandPath (Join-Path $Home_ 'install.ps1') -Force
+$RemoverCmd = Join-Path $Home_ 'uninstall.cmd'
+Set-Content $RemoverCmd -Encoding ASCII -Value @(
+  '@echo off',
+  'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0install.ps1" -Uninstall',
+  'pause')
+New-Shortcut $Remover $RemoverCmd $Icon
+Say 'Startmenü: JARVIS deinstallieren'
 
 Step 'Prüfe Ollama (für lokale Modelle)'
 $Ollama = Join-Path $env:LOCALAPPDATA 'Programs\Ollama\ollama.exe'

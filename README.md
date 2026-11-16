@@ -96,8 +96,10 @@ Neue Version herunterladen und den Installer noch einmal starten. Gespräche, Ge
 
 ### Deinstallieren
 
+Unter Windows im Startmenü **JARVIS deinstallieren** öffnen. Das funktioniert auch, wenn der heruntergeladene Ordner längst gelöscht ist. Alternativ im heruntergeladenen Ordner:
+
 ```powershell
-.\install.ps1 -Uninstall
+.\install.cmd -Uninstall
 ```
 
 Unter macOS und Linux: `./install.sh --uninstall`. Programm, Verknüpfungen und das Browserprofil werden entfernt. Deine Daten bleiben absichtlich liegen. Wer auch sie loswerden will, löscht den Datenordner (siehe [Wo die Daten liegen](#wo-die-daten-liegen)).

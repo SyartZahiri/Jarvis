@@ -36,7 +36,7 @@ Stand: 16. November 2026, Version 0.3.0. Ein Haken heißt: gebaut und durch die 
 ## Nicht geprüft
 
 - Das echte App-Fenster per Bildschirmfoto (auf diesem Rechner Chrome, Edge ist nicht installiert): Der Rechner war während der Prüfung gesperrt, die Darstellung wurde im eingebauten Browser geprüft, der dieselbe Engine nutzt.
-- `install.sh` unter macOS und Linux, `install.ps1` auf einem Rechner ohne Python (winget-Weg) und `-Uninstall`.
+- `install.sh` unter macOS und Linux, `install.ps1` auf einem Rechner ohne Python (winget-Weg). Die Deinstallation über den Startmenü-Eintrag wurde am 16.11.2026 unter Windows 11 geprüft.
 - Cloud-Anbieter mit echtem Key, Ollama-Modelle über 9B.
 - Mikrofon mit Vosk, Vorlesen, pyautogui, Fensterfokus auf einem echten Desktop.
 - Skalierung 125 und 150 %, Screenreader.

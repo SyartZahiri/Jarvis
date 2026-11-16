@@ -4,7 +4,7 @@
 
 - Neue Oberfläche im HUD-Stil in einem eigenen App-Fenster (Edge, Chrome oder Brave). Die alte Tk-Oberfläche ist entfernt.
 - Einrichtungsassistent beim ersten Start: erkennt und startet Ollama, schlägt ein Modell passend zum Arbeitsspeicher vor und lädt es, verbindet Cloud-Anbieter mit Key und Test.
-- Installer für Windows (`install.cmd`) sowie macOS und Linux (`install.sh`), App-Icon.
+- Installer für Windows (`install.cmd`) sowie macOS und Linux (`install.sh`), App-Icon. Unter Windows deinstalliert der Startmenü-Eintrag „JARVIS deinstallieren“, auch ohne den heruntergeladenen Ordner.
 - Unbeantwortete Nachrichten lassen sich erneut senden. Läuft Ollama nicht, bietet JARVIS an, es zu starten.
 - Uhrzeit und Erinnerungen stehen jetzt vor der Nachricht des Nutzers. Kleine lokale Modelle hatten den Block am Ende endlos wiederholt.
 - Abgelehnte Verbindungen zu lokalen Endpunkten werden sofort gemeldet statt zweimal wiederholt.
