@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+.jarvis/
+secrets.json
+*.sqlite3
+
+src/jarvis/bundled_skills/*/scripts/__pycache__/

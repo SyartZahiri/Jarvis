@@ -1,0 +1,6 @@
+{
+  "name": "calculator",
+  "description": "Berechnet arithmetische Ausdrücke sicher ohne eval().",
+  "version": "1.1.0",
+  "api": 1
+}

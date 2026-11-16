@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#030913">
+  <meta name="description" content="JARVIS – persönlicher Assistent, lokal auf deinem Rechner">
+  <title>JARVIS</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icon.png" type="image/png" sizes="256x256">
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10l-4.5 3.5V16H4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <symbol id="i-core" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4 4.5v3.7h3.7"/><path d="M12 8v4.3l2.8 1.7"/></symbol>
+    <symbol id="i-memory" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx=".5"/><path d="M9.5 3.5v3M14.5 3.5v3M9.5 17.5v3M14.5 17.5v3M3.5 9.5h3M3.5 14.5h3M17.5 9.5h3M17.5 14.5h3"/></symbol>
+    <symbol id="i-auto" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 0 1-12.9 5.2M4.5 12a7.5 7.5 0 0 1 12.9-5.2"/><path d="M17.8 3.6v3.6h-3.6M6.2 20.4v-3.6h3.6"/><circle cx="12" cy="12" r="1.6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+    <symbol id="i-command" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M7.5 10l2.5 2-2.5 2M12 14.5h4.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M4.5 12h14M13 6.5l5.5 5.5-5.5 5.5"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 12.5h9l1-12.5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M5 19l1-4L16 5l3 3L9 18z"/><path d="M14 7l3 3"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5l10.5 6.5L8 18.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8.5 5.5v13M15.5 5.5v13"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 6.5h6l2 2h9v10h-17z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10M10 19.5H4.5V14M19.5 4.5L13 11M4.5 19.5L11 13"/></symbol>
+    <symbol id="i-collapse" viewBox="0 0 24 24"><path d="M19.5 10H14V4.5M4.5 14H10v5.5M14 10l5.5-5.5M10 14l-5.5 5.5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3.5L6 13.5h5.5L10.5 20.5 18 10h-5.5z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5s1.2-6.1 3.8-8.5z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5M13.5 5l-3 14"/></symbol>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M7 3.5h7l4 4V17H7z"/><path d="M14 3.5V7.5h4M4.5 7v13.5H15"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.5v5.5c0 4.4-3 7.7-7 9-4-1.3-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9.5 2.5v3.5M14.5 2.5v3.5M9.5 18v3.5M14.5 18v3.5M2.5 9.5H6M2.5 14.5H6M18 9.5h3.5M18 14.5h3.5"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12.5h4l2.5-6 4 11 2.5-5H21"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.4A3.8 3.8 0 0 1 17.5 18.5z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5M6.5 9.5v10h11v-10"/><path d="M10 19.5v-5h4v5"/></symbol>
+  </svg>
+
+  <a class="skip" href="#prompt">Zur Eingabe springen</a>
+
+  <div class="app" id="app" data-page="chat" data-state="idle" data-chat="normal">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" class="bm-ring"/><circle cx="16" cy="16" r="8" class="bm-arc"/><circle cx="16" cy="16" r="3.4" class="bm-core"/></svg></span>
+        <span class="brand-text"><span class="brand-name">JARVIS</span><span class="brand-sub">Persönlicher Assistent</span></span>
+      </div>
+      <div class="clockline" aria-live="off">
+        <span class="greet" id="greet">Guten Abend</span>
+        <span class="clock" id="clock">--:--<span>:--</span></span>
+        <span class="date" id="date"></span>
+      </div>
+      <nav class="tabs" aria-label="Bereiche">
+        <button type="button" data-nav="chat"><svg><use href="#i-core"/></svg>Kern</button>
+        <button type="button" data-nav="memory"><svg><use href="#i-memory"/></svg>Gedächtnis</button>
+        <button type="button" data-nav="automations"><svg><use href="#i-auto"/></svg>Abläufe</button>
+        <button type="button" data-nav="settings"><svg><use href="#i-settings"/></svg>System</button>
+      </nav>
+      <div class="top-tools">
+        <button class="icon-btn" type="button" data-action="palette" title="Befehle · Strg+K" aria-label="Befehle"><svg><use href="#i-command"/></svg></button>
+      </div>
+    </header>
+
+    <aside class="side side-left" aria-label="Systemstatus">
+      <section class="card">
+        <h2 class="card-title"><svg><use href="#i-pulse"/></svg>Systemstatus</h2>
+        <ul class="vitals" id="vitals"></ul>
+      </section>
+      <section class="card">
+        <h2 class="card-title"><svg><use href="#i-shield"/></svg>Fähigkeiten<button class="text-btn" type="button" data-action="goto-permissions">Ändern</button></h2>
+        <ul class="caps" id="caps"></ul>
+      </section>
+      <section class="card card-grow">
+        <h2 class="card-title"><svg><use href="#i-cpu"/></svg>Protokoll</h2>
+        <ol class="log" id="log"></ol>
+      </section>
+    </aside>
+
+    <main class="center" id="main">
+      <section class="view view-core" data-view="chat" aria-label="Kern">
+        <div class="core">
+          <canvas class="sphere" id="sphere" aria-hidden="true"></canvas>
+          <div class="core-hud" aria-hidden="true">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="core-tag"><span class="label">Kern</span><span id="core-model">–</span></div>
+            <div class="core-readout" id="core-readout"></div>
+          </div>
+          <div class="modes" aria-live="polite">
+            <div class="mode" id="mode-primary"><span class="mode-dot"></span><span><b id="mode-title">Bereit</b><small id="mode-sub">Wartet auf deinen Auftrag</small></span></div>
+          </div>
+        </div>
+
+        <div class="quick" id="quick" role="toolbar" aria-label="Schnellaktionen">
+          <button type="button" data-action="new-chat"><svg><use href="#i-plus"/></svg><span>Neu</span></button>
+          <button type="button" data-action="template" data-template="research"><svg><use href="#i-globe"/></svg><span>Recherche</span></button>
+          <button type="button" data-action="template" data-template="files"><svg><use href="#i-files"/></svg><span>Dateien</span></button>
+          <button type="button" data-action="template" data-template="code"><svg><use href="#i-code"/></svg><span>Code</span></button>
+          <button type="button" data-nav="memory"><svg><use href="#i-memory"/></svg><span>Gedächtnis</span></button>
+          <button type="button" data-nav="automations"><svg><use href="#i-auto"/></svg><span>Abläufe</span></button>
+        </div>
+
+        <form class="composer" id="composer" autocomplete="off">
+          <label class="model-pill" title="Aktives Modell">
+            <span class="dot" id="model-dot"></span>
+            <select id="model-select" aria-label="Aktives Modell"></select>
+            <svg class="chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></svg>
+          </label>
+          <textarea id="prompt" rows="1" placeholder="Frag JARVIS oder gib einen Auftrag …" aria-label="Nachricht an JARVIS"></textarea>
+          <button class="icon-btn mic" type="button" id="mic" data-action="listen" title="Sprechen" aria-label="Sprechen" aria-pressed="false"><svg><use href="#i-mic"/></svg></button>
+          <button class="send" type="submit" id="send" title="Senden · Enter" aria-label="Senden"><svg><use href="#i-send"/></svg></button>
+        </form>
+        <p class="keys" id="keys"><kbd>Enter</kbd> senden · <kbd>Umschalt</kbd>+<kbd>Enter</kbd> neue Zeile · <kbd>Esc</kbd> stoppen · <kbd>Strg</kbd>+<kbd>K</kbd> Befehle</p>
+      </section>
+
+      <section class="view view-page" data-view="memory" aria-label="Gedächtnis" hidden></section>
+      <section class="view view-page" data-view="automations" aria-label="Abläufe" hidden></section>
+      <section class="view view-page" data-view="settings" aria-label="System" hidden></section>
+    </main>
+
+    <aside class="side side-right" aria-label="Unterhaltung">
+      <section class="card card-chat">
+        <h2 class="card-title"><svg><use href="#i-chat"/></svg><span class="chat-title" id="chat-title">Neues Gespräch</span>
+          <span class="card-tools">
+            <button class="icon-btn" type="button" data-action="toggle-history" title="Verlauf · Alt+H" aria-label="Verlauf" aria-expanded="false"><svg><use href="#i-history"/></svg></button>
+            <button class="icon-btn" type="button" data-action="new-chat" title="Neues Gespräch · Alt+N" aria-label="Neues Gespräch"><svg><use href="#i-plus"/></svg></button>
+            <button class="icon-btn" type="button" data-action="toggle-wide" title="Breiter" aria-label="Gesprächsbereich verbreitern"><svg><use href="#i-expand"/></svg></button>
+          </span>
+        </h2>
+        <div class="history" id="history" hidden>
+          <label class="search"><svg><use href="#i-search"/></svg><input id="history-search" type="search" placeholder="Gespräche durchsuchen" autocomplete="off" spellcheck="false"></label>
+          <ol class="history-list" id="history-list"></ol>
+        </div>
+        <div class="transcript" id="transcript" role="log" aria-live="polite" aria-relevant="additions"></div>
+      </section>
+      <section class="card card-insight">
+        <div class="ring" id="context-ring" role="img" aria-label="Kontextauslastung"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" class="ring-bg"/><circle cx="32" cy="32" r="26" class="ring-fg" id="ring-fg"/></svg><span id="ring-value">0%</span></div>
+        <dl class="insight" id="insight"></dl>
+      </section>
+    </aside>
+  </div>
+
+  <div class="overlay" id="approval" hidden>
+    <div class="dialog dialog-approval" role="alertdialog" aria-modal="true" aria-labelledby="approval-title" aria-describedby="approval-meta">
+      <div class="dialog-head">
+        <span class="label approval-label" id="approval-label">Freigabe erforderlich</span>
+        <span class="approval-count" id="approval-count"></span>
+      </div>
+      <h2 class="dialog-title" id="approval-title"></h2>
+      <p class="dialog-meta" id="approval-meta"></p>
+      <pre class="approval-detail" id="approval-detail"></pre>
+      <div class="dialog-actions">
+        <button class="btn" type="button" id="approval-deny">Ablehnen</button>
+        <button class="btn btn-primary" type="button" id="approval-allow">Einmal erlauben</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="dialog" hidden>
+    <form class="dialog" id="dialog-form" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+      <h2 class="dialog-title" id="dialog-title"></h2>
+      <p class="dialog-meta" id="dialog-body"></p>
+      <input class="input" id="dialog-input" hidden>
+      <div class="dialog-actions">
+        <button class="btn" type="button" id="dialog-cancel">Abbrechen</button>
+        <button class="btn btn-primary" type="submit" id="dialog-ok">OK</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="overlay overlay-top" id="palette" hidden>
+    <div class="palette" role="dialog" aria-modal="true" aria-label="Befehle">
+      <label class="palette-input">
+        <svg><use href="#i-command"/></svg>
+        <input id="palette-input" type="text" placeholder="Befehl oder Gespräch suchen …" autocomplete="off" spellcheck="false" role="combobox" aria-controls="palette-list" aria-expanded="true">
+        <kbd>Esc</kbd>
+      </label>
+      <ol class="palette-list" id="palette-list" role="listbox"></ol>
+    </div>
+  </div>
+
+  <div class="overlay overlay-setup" id="setup" hidden>
+    <div class="setup" role="dialog" aria-modal="true" aria-labelledby="setup-title">
+      <ol class="setup-steps" id="setup-steps" aria-label="Schritte"></ol>
+      <div class="setup-body" id="setup-body"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+</body>
+</html>
